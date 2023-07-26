@@ -4,7 +4,7 @@ import React from 'react'
 import HeaderTab from '../components/HeaderTab'
 import SearchBar from '../components/SearchBar'
 import Categories from '../components/Categories'
-import RestaurantItem from '../components/RestaurantItem'
+import RestaurantItems from '../components/RestaurantItems'
 import Constants from 'expo-constants'
 import Ionicons from '@expo/vector-icons/Ionicons'
 
@@ -19,10 +19,8 @@ const Home = () => {
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Categories />
-                <RestaurantItem />
-                <RestaurantItem />
-                <RestaurantItem />
-                <RestaurantItem />
+                <RestaurantItems />
+               
             </ScrollView>
         </SafeAreaView>
     )
