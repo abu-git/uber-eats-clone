@@ -3,8 +3,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import React, { useState } from 'react'
 
 
-const HeaderTab = () => {
-    const [activeTab, setActiveTab] = useState("Delivery")
+const HeaderTab = (props) => {
+    //const [activeTab, setActiveTab] = useState("Delivery")
 
     return (
         <View style={{ flexDirection: "row", alignSelf: "center"}}>
@@ -12,15 +12,15 @@ const HeaderTab = () => {
                 text="Delivery" 
                 btnColor="black" 
                 textColor="white" 
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
+                activeTab={props.activeTab}
+                setActiveTab={props.setActiveTab}
             />
             <HeaderButton 
                 text="PickUp" 
                 btnColor="white" 
                 textColor="black" 
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
+                activeTab={props.activeTab}
+                setActiveTab={props.setActiveTab}
             />
         </View>
     )
