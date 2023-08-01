@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { Divider } from '@rneui/themed'
 import React from 'react'
 
 const foods = [
@@ -26,12 +26,6 @@ const foods = [
         description: "One can never go wrong with chicken caesar salad",
         price: "$21.50",
         image: "https://img.taste.com.au/oMBGDey1/taste/2017/01/chicken-caesar-salad-with-a-twist_1980x1320-119937-1.jpg"
-    },
-    {
-        title: "Tandoori Chicken",
-        description: "Amazing Indian dish with tenderloin chicken off",
-        price: "$19.20",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo_onETr3aMPQd4ORaj-TSXN7gwH-p5R88xA&usqp=CAU"
     }
 ]
 
@@ -60,6 +54,7 @@ export default function MenuItems() {
                         <FoodInfo food={food} />
                         <FoodImage food={food} />
                     </View>
+                    <Divider width={0.5} orientation='vertical' style={{ marginHorizontal: 20 }} />
                 </View>
             ))}
         </ScrollView>

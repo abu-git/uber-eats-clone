@@ -13,7 +13,7 @@ import BottomTabs from '../components/home/BottomTabs'
 
 const YELP_API_KEY = "1bEsO0nUS6Gd8UORNsQYfCzQ85ylHAO4B6NRA4loJ8UxZRvHEhNP6NKXmuMARDMGZH-fCPX40SL5XMWvVal5J2DW-NSY3FlI7bBhimW6ogZavuRKOKVmN3AWfqrBZHYx"
 
-const Home = () => {
+const Home = ({ navigation }) => {
     const [restaurantData, setRestaurantData] = useState(localRestaurants)
     const [city, setCity] = useState("San Diego")
     const [activeTab, setActiveTab] = useState("Delivery")
@@ -53,10 +53,13 @@ const Home = () => {
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Categories />
-                <RestaurantItems restaurantData={restaurantData} />
+                <RestaurantItems restaurantData={restaurantData} navigation={navigation} />
             </ScrollView>
-            <Divider width={1} />
-            <BottomTabs />
+            <View style={{ marginBottom: Dimensions.get("screen").height - Dimensions.get('window').height - 20 }}>{/* added to fix bottom tab from hiding behind android navigation */}
+                <Divider width={1} />
+                <BottomTabs />
+            </View>
+            
         </SafeAreaView>
     )
 }
