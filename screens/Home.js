@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Dimensions } from 'react-native'
+import { View, Text, ScrollView, Dimensions, StatusBar } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import React, { useState, useEffect } from 'react'
 import HeaderTab from '../components/home/HeaderTab'
@@ -55,7 +55,7 @@ const Home = ({ navigation }) => {
                 <Categories />
                 <RestaurantItems restaurantData={restaurantData} navigation={navigation} />
             </ScrollView>
-            <View style={{ marginBottom: Dimensions.get("screen").height - Dimensions.get('window').height - 20 }}>{/* added to fix bottom tab from hiding behind android navigation */}
+            <View style={{ marginBottom: Dimensions.get("screen").height - Dimensions.get('window').height - StatusBar.currentHeight }}>{/* added to fix bottom tab from hiding behind android navigation */}
                 <Divider width={1} />
                 <BottomTabs />
             </View>
