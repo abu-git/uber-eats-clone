@@ -3,6 +3,10 @@ import { Divider } from '@rneui/themed'
 import React from 'react'
 import BouncyCheckbox from "react-native-bouncy-checkbox"
 
+//Redux imports
+import { useSelector, useDispatch } from 'react-redux'
+import { addToCart, removeFromCart, theCart } from '../../features/counter/counterSlice'
+
 const foods = [
     {
         title: "Lasagna",
@@ -46,13 +50,25 @@ const styles = StyleSheet.create({
     }
 })
 
-export default function MenuItems() {
+export default function MenuItems({ restaurantName }) {
+    const theCart = useSelector(state => state.counter.items)
+    const dispatch = useDispatch()
+    const selectItem = (item, checkboxValue) => {
+        if(checkboxValue) dispatch(addToCart({...item, restaurantName: restaurantName, checkboxValue: checkboxValue }))
+        else dispatch(removeFromCart({...item, restaurantName: restaurantName, checkboxValue: checkboxValue }))
+        console.log(theCart)
+    }
+
     return (
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>
             {foods.map((food, index) => (
                 <View key={index}>
                     <View style={styles.menuItemStyle}>
-                        <BouncyCheckbox iconStyle={{ borderColor: "lightgray", borderRadius: 0}} fillColor='green' />
+                        <BouncyCheckbox 
+                            iconStyle={{ borderColor: "lightgray", borderRadius: 0}} 
+                            fillColor='green' 
+                            onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+                        />
                         <FoodInfo food={food} />
                         <FoodImage food={food} />
                     </View>
