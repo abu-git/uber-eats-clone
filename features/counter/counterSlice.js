@@ -24,6 +24,8 @@ export const counterSlice = createSlice({
             }
             //console.log(newState.selectedItems, "👉")
             state.selectedItems.items = newState.selectedItems.items
+            state.selectedItems.restaurantName = newState.selectedItems.restaurantName
+            state.selectedItems.checkboxValue = newState.selectedItems.checkboxValue
         }
             //console.log(newState, "👉")
             //console.log(JSON.stringify(newState))
@@ -42,16 +44,15 @@ export const counterSlice = createSlice({
                 //console.log(JSON.stringify(newState))
                 state.selectedItems.items = newState.selectedItems.items
             }
-        },
-        incrementByAmount: (state, action) => {
-            state.value += action.payload
-        },
+        }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { addToCart, removeFromCart, incrementByAmount } = counterSlice.actions
+export const { addToCart, removeFromCart } = counterSlice.actions
 
 export const selectItems = (state) => state.counter.selectedItems.items
+
+export const selectRestaurantName = (state) => state.counter.selectedItems.restaurantName
 
 export default counterSlice.reducer
