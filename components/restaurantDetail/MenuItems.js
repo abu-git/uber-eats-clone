@@ -5,7 +5,7 @@ import BouncyCheckbox from "react-native-bouncy-checkbox"
 
 //Redux imports
 import { useSelector, useDispatch } from 'react-redux'
-import { addToCart, removeFromCart, theCart } from '../../features/counter/counterSlice'
+import { addToCart, removeFromCart, selectItems } from '../../features/counter/counterSlice'
 
 const foods = [
     {
@@ -51,12 +51,16 @@ const styles = StyleSheet.create({
 })
 
 export default function MenuItems({ restaurantName }) {
-    const theCart = useSelector(state => state.counter.items)
+    const cartItems = useSelector((state) => selectItems(state))
     const dispatch = useDispatch()
     const selectItem = (item, checkboxValue) => {
         if(checkboxValue) dispatch(addToCart({...item, restaurantName: restaurantName, checkboxValue: checkboxValue }))
         else dispatch(removeFromCart({...item, restaurantName: restaurantName, checkboxValue: checkboxValue }))
-        console.log(theCart)
+        
+    }
+    console.log(cartItems, "the  cart")
+    const isFoodInCart = (food, cartItems) => {
+        return Boolean(cartItems.find((item) => item.title === food.title))
     }
 
     return (
@@ -68,6 +72,7 @@ export default function MenuItems({ restaurantName }) {
                             iconStyle={{ borderColor: "lightgray", borderRadius: 0}} 
                             fillColor='green' 
                             onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+                            isChecked={isFoodInCart(food, cartItems)}
                         />
                         <FoodInfo food={food} />
                         <FoodImage food={food} />
