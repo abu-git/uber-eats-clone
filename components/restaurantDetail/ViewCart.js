@@ -64,6 +64,27 @@ export default function ViewCart() {
                         {items.map((item, index) => (
                             <OrderItem key={index} item={item} />
                         ))}
+                        <View style={styles.subtotalContainer}>
+                            <Text style={styles.subtotalText}>Subtotal</Text>
+                            <Text>{totalUSD}</Text>
+                        </View>
+
+                        <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                            <TouchableOpacity style={{
+                                    marginTop: 20,
+                                    backgroundColor: "black",
+                                    alignItems: "center",
+                                    padding: 13,
+                                    borderRadius: 30,
+                                    width: 300,
+                                    position: "relative"
+                                }}
+                                onPress={() => setModalVisible(false)}
+                            >
+                                <Text style={{ color: "white", fontSize: 20 }}>Checkout</Text>
+                                <Text style={{ position: "absolute", right: 20, color: "white", fontSize: 15, top: 17 }}>{ total ? totalUSD : ""}</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </>
