@@ -11,11 +11,11 @@ const yelpRestaurantInfo = {
     rating: 4.5,
     categories: [{ title: "Thai" }, { title: "Comfort Food" }]
 }
+
 /*
 const { name, image, price, reviews, rating, categories } = yelpRestaurantInfo
 const formattedCategories = categories.map((cat) => cat.title).join(' • ')
 const description = `${formattedCategories} ${price ? ' • ' + price : ""} • 🎫 • ${rating} ⭐ (${reviews}+)`
-
 
 const image = "https://insideguide.co.za/cape-town/app/uploads/2023/07/best-fireplace-restaurants.webp"
 const title = "Farmhouse Kitchen Thai Cuisine"

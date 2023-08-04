@@ -3,25 +3,18 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectItems, selectRestaurantName } from '../../features/counter/counterSlice'
 import OrderItem from './OrderItem'
-//import firebase from "firebase/compat/app"
+import LottieView from 'lottie-react-native'
 
 //Firebase Firestore Database setup
+import app from '../../firebase'
 import { getFirestore, collection, doc, addDoc } from "firebase/firestore"
-import { initializeApp} from "firebase/app"
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCRaDQfUgfI3_bBqwSMb-b6L52RCEDMnWU",
-    authDomain: "rn-uber-eats-clone-54273.firebaseapp.com",
-    projectId: "rn-uber-eats-clone-54273",
-    storageBucket: "rn-uber-eats-clone-54273.appspot.com",
-    messagingSenderId: "743794020136",
-    appId: "1:743794020136:web:f25ea41cb9915356040a1d"
-}
 
-const app = initializeApp(firebaseConfig)
 
 export default function ViewCart({ navigation }) {
     const [modalVisible, setModalVisible] = useState(false)
+    const [loading, setLoading] = useState(false)
+
     const restaurantName = useSelector((state) => selectRestaurantName(state)) 
     const items = useSelector((state) => selectItems(state))
     let total = items.map((item) => Number(item.price.replace('$', ''))).reduce((prev, curr) => prev + curr, 0)
@@ -45,11 +38,16 @@ export default function ViewCart({ navigation }) {
                 createdAt: new Date(Date.now())
             })
             console.log("Order successfully added to Firebase")
+            setTimeout(() => {
+                setLoading(false)
+                setModalVisible(false)
+                navigation.navigate("OrderCompleted")
+            }, 2500)
         }catch (e) {
             console.error("Error adding document...", e)
         }
-        setModalVisible(false)
-        navigation.navigate("OrderCompleted")
+        
+        
     }
 
     const styles = StyleSheet.create({
@@ -113,6 +111,8 @@ export default function ViewCart({ navigation }) {
                                 }}
                                 onPress={() => {
                                     addOrderToFirebase()
+                                    setLoading(!loading)
+                                    setModalVisible(!modalVisible)
                                 }}
                             >
                                 <Text style={{ color: "white", fontSize: 20 }}>Checkout</Text>
@@ -188,11 +188,12 @@ export default function ViewCart({ navigation }) {
                 </View> 
             ) : (
                 <></>
-            )}
-            
-
-            
+            )} 
+            {loading ? (<>
+                <View style={{ backgroundColor: "black", position: "absolute", opacity: 0.6, justifyContent: "center", alignItems: "center", height: "100%", width: "100%" }}>
+                    <LottieView style={{ height: 200 }} source={require("../../assets/animations/scanner.json")} autoPlay speed={3}/>
+                </View>
+            </>) : (<></>)}
         </>
-        
     )
 }
