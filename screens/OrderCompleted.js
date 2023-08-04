@@ -1,5 +1,5 @@
-import { View, Text, ScrollView } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { View, Text, ScrollView, SafeAreaView } from 'react-native'
+//import { SafeAreaView } from 'react-native-safe-area-context'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectItems, selectRestaurantName } from '../features/counter/counterSlice'

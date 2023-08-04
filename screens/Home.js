@@ -1,5 +1,5 @@
-import { View, Text, ScrollView, Dimensions, StatusBar } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { View, Text, ScrollView, Dimensions, StatusBar, SafeAreaView } from 'react-native'
+//import { SafeAreaView } from 'react-native-safe-area-context'
 import React, { useState, useEffect } from 'react'
 import HeaderTab from '../components/home/HeaderTab'
 import SearchBar from '../components/home/SearchBar'
