@@ -4,7 +4,7 @@
 node_modules/
 
 # firebase Auth details
-firebase.js
+
 
 # Expo
 .expo/
