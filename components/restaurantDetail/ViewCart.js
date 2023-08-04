@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectItems, selectRestaurantName } from '../../features/counter/counterSlice'
 import OrderItem from './OrderItem'
-import firebase from "firebase/compat/app"
+//import firebase from "firebase/compat/app"
 
 //Firebase Firestore Database setup
 import { getFirestore, collection, doc, addDoc } from "firebase/firestore"
@@ -20,45 +20,36 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 
-export default function ViewCart() {
+export default function ViewCart({ navigation }) {
     const [modalVisible, setModalVisible] = useState(false)
     const restaurantName = useSelector((state) => selectRestaurantName(state)) 
     const items = useSelector((state) => selectItems(state))
     let total = items.map((item) => Number(item.price.replace('$', ''))).reduce((prev, curr) => prev + curr, 0)
     //console.log(JSON.stringify(items), "items")
-    console.log(restaurantName)
+    //console.log(restaurantName)
 
     const totalUSD = total.toLocaleString('en', {
         style: 'currency',
         currency: 'USD'
     })
 
-    console.log(totalUSD)
+    //console.log(totalUSD)
 
     async function addOrderToFirebase(){
         const db = getFirestore(app)
-        /*db.collection("orders").add({
-            items: items,
-            restaurantName: restaurantName,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        })*/
         
-        const ordersDB = collection(db, "orders")
-        /*await addDoc(doc(ordersDB), { 
-            items: items,
-            restaurantName: restaurantName,
-            //createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        })*/
         try{
             await addDoc(collection(db, "orders"), {
                 items: items,
                 restaurantName: restaurantName,
                 createdAt: new Date(Date.now())
             })
+            console.log("Order successfully added to Firebase")
         }catch (e) {
             console.error("Error adding document...", e)
         }
         setModalVisible(false)
+        navigation.navigate("OrderCompleted")
     }
 
     const styles = StyleSheet.create({
