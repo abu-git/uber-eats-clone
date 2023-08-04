@@ -3,7 +3,21 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectItems, selectRestaurantName } from '../../features/counter/counterSlice'
 import OrderItem from './OrderItem'
+//import app from '../../firebase'
+//import { getFirestore, collection, doc, addDoc } from "firebase/firestore"
+//import  firebase  from "firebase"
+//import { initializeApp} from "firebase/app"
 
+/*const firebaseConfig = {
+    apiKey: "AIzaSyCRaDQfUgfI3_bBqwSMb-b6L52RCEDMnWU",
+    authDomain: "rn-uber-eats-clone-54273.firebaseapp.com",
+    projectId: "rn-uber-eats-clone-54273",
+    storageBucket: "rn-uber-eats-clone-54273.appspot.com",
+    messagingSenderId: "743794020136",
+    appId: "1:743794020136:web:f25ea41cb9915356040a1d"
+}
+
+const app = initializeApp(firebaseConfig)*/
 
 export default function ViewCart() {
     const [modalVisible, setModalVisible] = useState(false)
@@ -19,6 +33,31 @@ export default function ViewCart() {
     })
 
     console.log(totalUSD)
+
+    /*async function addOrderToFirebase(){
+        const db = getFirestore(app)
+        /*db.collection("orders").add({
+            items: items,
+            restaurantName: restaurantName,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        
+        const ordersDB = collection(db, "orders")
+        /*await addDoc(doc(ordersDB), { 
+            items: items,
+            restaurantName: restaurantName,
+            //createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        try{
+            await addDoc(collection(db, "orders"), {
+                items: items,
+                restaurantName: restaurantName,
+            })
+        }catch (e) {
+            console.error("Error adding document...", e)
+        }
+        setModalVisible(false)
+    }*/
 
     const styles = StyleSheet.create({
         modalContainer: {
@@ -79,7 +118,9 @@ export default function ViewCart() {
                                     width: 300,
                                     position: "relative"
                                 }}
-                                onPress={() => setModalVisible(false)}
+                                onPress={() => {
+                                    setModalVisible(false)
+                                }}
                             >
                                 <Text style={{ color: "white", fontSize: 20 }}>Checkout</Text>
                                 <Text style={{ position: "absolute", right: 20, color: "white", fontSize: 15, top: 17 }}>{ total ? totalUSD : ""}</Text>
