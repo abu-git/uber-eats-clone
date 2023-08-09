@@ -9,3 +9,8 @@ This is a React Native application that aims to replicate the basic functionalit
 + Redux
 + Yelp API
 + Firebase
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
