@@ -1,5 +1,5 @@
-import { View, Text, ScrollView, SafeAreaView } from 'react-native'
-//import { SafeAreaView } from 'react-native-safe-area-context'
+import { View, Text, ScrollView } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectItems, selectRestaurantName } from '../features/counter/counterSlice'
@@ -50,9 +50,9 @@ export default function OrderCompleted() {
     }, [])
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "white", padding: 15 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
             <View>
-                <LottieView style={{ height: 100, alignSelf: "center", marginBottom: 30 }} source={require('../assets/animations/check-mark.json')} autoPlay speed={0.5} loop={false} />
+                <LottieView style={{ height: 100, alignSelf: "center", marginBottom: 30, margin: 15 }} source={require('../assets/animations/check-mark.json')} autoPlay speed={0.5} loop={false} />
             </View> 
             <View style={{ margin: 15, alignItems: "center" }}>
                 <Text style={{ fontSize: 20, fontWeight: "bold"}}>Your order at {restaurantName} has been placed for {totalUSD}</Text>
